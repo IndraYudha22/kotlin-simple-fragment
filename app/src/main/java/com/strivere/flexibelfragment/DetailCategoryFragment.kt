@@ -1,5 +1,6 @@
 package com.strivere.flexibelfragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_detail_category.*
 
 
@@ -61,12 +63,20 @@ class DetailCategoryFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id){
             R.id.btn_profile -> {
-
+                
             }
 
             R.id.btn_show_dialog -> {
-
+                val mOptionDialogFragment = OptionalDialogFragment()
+                val mFragmentManager = childFragmentManager
+                mOptionDialogFragment.show(mFragmentManager, OptionalDialogFragment::class.java.simpleName)
             }
+        }
+    }
+
+    internal var optionDialogListener: OptionalDialogFragment.OnOptionDialogListener = object : OptionalDialogFragment.OnOptionDialogListener {
+        override fun onOptionChosen(text: String?) {
+            Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
         }
     }
 }
